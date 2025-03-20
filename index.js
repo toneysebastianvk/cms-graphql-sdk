@@ -1,5 +1,5 @@
 const { ApolloServer, gql } = require("apollo-server");
-const { AmplienceSDK } = require("./getpage");
+const { AmplienceSDK } = require("./getPage");
 
 // Step 1: Define the GraphQL Schema
 
