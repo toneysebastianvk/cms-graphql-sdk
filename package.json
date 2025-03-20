@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -12,7 +13,11 @@
   "dependencies": {
     "apollo-server": "^3.13.0",
     "axios": "^1.8.1",
+    "dc-delivery-sdk-js": "^0.15.0",
     "graphql": "^16.10.0",
     "tokenizr": "^1.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
   }
 }
