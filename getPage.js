@@ -8,7 +8,7 @@ class AmplienceSDK {
   client;
   constructor() {}
 
-  async init(preview) {
+  async init(preview, timestamp) {
     if (!preview) {
       this.client = new ContentClient({
         hubName: HUB_NAME,
@@ -18,7 +18,7 @@ class AmplienceSDK {
         "uowk0qxoku001ufatmmwkv1fe.staging.bigcontent.io"
       );
       const stagingEnvironmentAtTimestamp = await factory.generateDomain({
-        //timestamp: 1742495400000,
+        ...(!!timestamp && { timestamp }),
       });
       this.client = new ContentClient({
         hubName: HUB_NAME,

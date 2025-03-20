@@ -5,10 +5,15 @@ const { AmplienceSDK } = require("./getpage");
 
 const typeDefs = gql`
   scalar JSON
+  scalar Timestamp
 
   type Query {
     hello: String
-    getAmplienceContent(deliveryKey: String, preview: Boolean): AmplienceContent
+    getAmplienceContent(
+      deliveryKey: String
+      preview: Boolean
+      timestamp: Timestamp
+    ): AmplienceContent
   }
 
   type AmplienceContent {
@@ -28,7 +33,7 @@ const resolvers = {
     },
     async getAmplienceContent(_parent, args) {
       const amplienceInstance = new AmplienceSDK();
-      await amplienceInstance.init(args.preview);
+      await amplienceInstance.init(args.preview, args.timestamp);
       const result = await amplienceInstance.getModule(args.deliveryKey);
       return { page: { ...result } };
     },
