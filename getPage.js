@@ -27,9 +27,24 @@ class AmplienceSDK {
     }
   }
 
-  async getModule(deliveryKey) {
-    const content = await this.client.getContentItemByKey(deliveryKey);
-    return content.body;
+  async getModule({ deliveryKey, page, productid }) {
+    let content = undefined;
+    if (page === "pdp" && productid) {
+      const filterContent = await this.client
+        .filterByContentType("https://quadratic.amplience.com/content/pdp")
+        .filterBy("/productSelector", productid)
+        .page(1)
+        .request({
+          format: "inlined",
+          depth: "all",
+        });
+      content = filterContent?.responses?.[0]?.content;
+    }
+    if (!!deliveryKey) {
+      const data = await this.client.getContentItemByKey(deliveryKey);
+      content = data?.body;
+    }
+    return content;
   }
 }
 

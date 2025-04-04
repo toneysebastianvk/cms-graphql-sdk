@@ -13,6 +13,8 @@ const typeDefs = gql`
       deliveryKey: String
       preview: Boolean
       timestamp: Timestamp
+      page: String
+      productid: String
     ): AmplienceContent
   }
 
@@ -34,7 +36,7 @@ const resolvers = {
     async getAmplienceContent(_parent, args) {
       const amplienceInstance = new AmplienceSDK();
       await amplienceInstance.init(args.preview, args.timestamp);
-      const result = await amplienceInstance.getModule(args.deliveryKey);
+      const result = await amplienceInstance.getModule(args);
       return { page: { ...result } };
     },
   },
